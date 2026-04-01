@@ -43,7 +43,23 @@ class VectorStore:
       self.collection.update(ids=[product_id], metadatas=[meta])
     except Exception as e:
       logger.error(f'Error updating stock for product ID {product_id}: {e}')
+  
+  def update_price(self, product_id: str, new_price:float):
+    try:
+      existing = self.collection.get(ids=[product_id], include=['metadata'])
+      if not existing['ids']:
+        logger.warning(f'Product ID {product_id} not found in vector store for price update')
+        return
       
+      meta = existing['metadatas'][0]
+      meta['price'] = new_price
+
+      self.collection.update(ids=[product_id], metadatas=[meta])
+    except Exception as e:
+      logger.error(f'Error updating price for product ID {product_id}: {e}')
+
+  
+
 
 
   

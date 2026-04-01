@@ -10,7 +10,6 @@ class TextProcessor:
       f'Tên sản phẩm: {product.name}',
       f'Thương hiệu: {product.brand}',
       f'Danh mục: {category_mapped}',
-      f'Giá: {price_formatted} VNĐ',
       '',
       'Cấu hình:',
       f'  - Bộ xử lí (CPU): {product.specs.cpu}',
