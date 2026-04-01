@@ -19,7 +19,6 @@ class TextProcessor:
       f'  - Card đồ họa (GPU): {product.specs.gpu}'
       f'  - Ổ cứng: {product.specs.storage}',
       '',
-      f'Tồn kho: {'Còn hàng (' +str(product.stock) + ' sản phẩm)' if product.is_in_stock else "Hết hàng"}',
       f'Mô tả: {product.description}',
       f'Link sản phẩm: {product.product_url}'
     ]
@@ -44,15 +43,15 @@ class TextProcessor:
   
   def process_all(self, products: list[Product]) -> tuple[list[str], list[dict], list[str]]:
     texts: list[str] = []
-    metadata: list[dict] = []
+    metadatas: list[dict] = []
     ids: list[str] = []
 
     for product in products:
       texts.append(self.product_to_text(product))
-      metadata.append(self.product_to_metadata(product))
+      metadatas.append(self.product_to_metadata(product))
       ids.append(product.id)
 
-    return texts, metadata, ids
+    return texts, metadatas, ids
   
   
   
