@@ -18,5 +18,5 @@ class Product(BaseModel):
 class RetrievedDoc(BaseModel):
   text: str
   metadata: dict[str, Any]
-  score: float = 0.0
+  score: float = 0.0 #điểm tương đồng vector hoặc điểm BM25 tùy theo ngữ cảnh
   source_type: str = "product" #hoặc "company"
