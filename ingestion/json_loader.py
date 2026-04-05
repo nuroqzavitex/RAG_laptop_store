@@ -7,6 +7,7 @@ from core.models import Product
 
 log = get_logger(__name__)
 
+# Định nghĩa các trường bắt buộc cho sản phẩm
 REQUIRED_FIELDS = {'id', 'name', 'brand', 'price', 'specs'}
 
 def load_products(json_path: Path | None = None) -> list[Product]:
@@ -32,7 +33,7 @@ def load_products(json_path: Path | None = None) -> list[Product]:
   products: list[Product] = []
 
   for idx, item in enumerate(raw):
-    missing = REQUIRED_FIELDS - set(item.keys())
+    missing = REQUIRED_FIELDS - set(item.keys()) # Kiểm tra xem có trường nào bị thiếu không
     if missing:
       log.warning(f"Product at index {idx} is missing fields: {missing}. Skipping.")
       continue
