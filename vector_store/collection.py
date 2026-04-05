@@ -39,4 +39,5 @@ def delete_collection(collection_name: str) -> None:
   else:
     log.warning(f"Collection '{collection_name}' does not exist. Cannot delete.")
 
-
+def get_all_product_ids(collection_name: str) -> list[str]:
+  pass
