@@ -9,6 +9,7 @@ def _build_qdrant_filter(where: dict[str, Any]) -> Filter | None:
   conditions = []
 
   if '$and' in where:
+    # where là dict gồm nhiều điều kiện lọc
     for cond in where['$and']:
       f = _parse_single_condition(cond)
       if f:
@@ -30,6 +31,7 @@ def _parse_single_condition(cond: dict[str, Any]) -> FieldCondition | None:
           key=field,
           match=MatchValue(value=value['$eq'])
         )
+      # kiểm tra 1 list có chứa giá trị cần tìm không
       if '$contains' in value:
         return FieldCondition(
           key = field,
@@ -49,7 +51,7 @@ def _parse_single_condition(cond: dict[str, Any]) -> FieldCondition | None:
       if range_params:
         return FieldCondition(
           key=field,
-          range=Range(**range_params)
+          range=Range(**range_params) # chuyển các giá trị key_value thành các đối số trong Range
         )
 
     else:
