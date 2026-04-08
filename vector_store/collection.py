@@ -40,4 +40,26 @@ def delete_collection(collection_name: str) -> None:
     log.warning(f"Collection '{collection_name}' does not exist. Cannot delete.")
 
 def get_all_product_ids(collection_name: str) -> list[str]:
-  pass
+  client = _get_client()
+  if not client.collection_exists(collection_name):
+    log.info(f'Collection {collection_name} does not exist, returning empty ids')
+    return []
+  
+  all_ids = []
+  offset = None
+
+  while True:
+    results, offset = client.scroll(
+      collection_name=collection_name,
+      limit = 100,
+      offset=offset,
+      with_payload=['_doc_id']
+    )
+
+    for point in results:
+      doc_id = point.payload.get('_doc_id', str(point.id)) if point.payload else str(point.id)
+      all_ids.append(doc_id)
+    if offset is None:
+      break
+
+  return all_ids
