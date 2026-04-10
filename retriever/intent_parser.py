@@ -55,6 +55,7 @@ RAM_PATTERN = re.compile(r"(\d+)\s*(?:gb|GB)\s*(?:ram|RAM)?", re.I)
 STORAGE_PATTERN = re.compile(r"(?:ssd\s*)?(\d+)\s*(?:tb|TB)", re.I)
 
 def parse_intent(query: str) -> dict[str, Any]:
+  # Trả về dict chứa các thông tin đã trích xuất được từ user, ví dụ {'brand': 'asus', 'price_max': 2000000}
   q = query.lower()
   intent: dict[str, Any] = {}
 

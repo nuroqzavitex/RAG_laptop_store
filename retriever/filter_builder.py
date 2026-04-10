@@ -49,7 +49,7 @@ def build_metadata_filter(intent: dict[str, Any]) -> dict[str, Any]:
   return filters
 
 def post_filter_results(results: list[dict[str, Any]], meta_filter: dict[str, Any]) -> list[dict[str, Any]]:
-  # results gồm các sản phẩm sau khi search từ qdrant db (qua qdrant_filter và top_k), meta_filter gồm filter về gpu, ram, storage
+  # results gồm các sản phẩm sau khi search từ qdrant db (qua qdrant_filter và top_k), meta_filter gồm filter về gpu, ram, storage -> kiểm tra các sản phẩm trong results đã khớp meta_filter -> trả về sản phẩm khớp
   if not meta_filter:
     return results
   
