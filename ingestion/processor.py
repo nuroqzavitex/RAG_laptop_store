@@ -1,6 +1,8 @@
 from __future__ import annotations
+import re
 from typing import Any
 from core.models import Product
+from pyvi import ViTokenizer
 from core.logger import get_logger
 
 log = get_logger(__name__)
@@ -11,6 +13,12 @@ CATEGORY_LABELS = {
   'laptrinh': "Lập trình",
   'hoctap_vanphong': 'Học tập / Văn phòng'
 }
+
+def _normalize(text: str) -> str:
+  text = text.lower()
+  text = re.sub(r"[^\w\s]", " ", text)
+  text = re.sub(r"\s+", " ", text).strip()
+  return text
 
 def product_to_text(product: Product) -> str:
   specs = product.specs
@@ -30,8 +38,12 @@ def product_to_text(product: Product) -> str:
   return ' | '.join(parts)
 
 def product_to_metadata(product: Product) -> dict[str, Any]:
+  text = product_to_text(product)
+  clean_text = _normalize(text)
+  segmented_text = ViTokenizer.tokenize(clean_text)
   return {
     'product_id': product.id,
+    'segmented_text': segmented_text,
     'brand': product.brand,
     'price': product.price,
     'stock': product.stock,
