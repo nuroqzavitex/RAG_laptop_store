@@ -35,3 +35,9 @@ class RetrievedDoc(BaseModel):
   metadata: dict[str, Any]
   score: float = 0.0 #điểm tương đồng vector hoặc điểm BM25 tùy theo ngữ cảnh
   source_type: str = "product" #hoặc "company"
+
+class ChatResponse(BaseModel):
+  answer: str
+  products: list[dict[str, Any]] = Field(default_factory=list)
+  route: str = 'product' # chitchat | company
+  retrieval_time_ms: float = 0.0
