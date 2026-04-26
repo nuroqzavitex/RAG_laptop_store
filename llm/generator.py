@@ -106,7 +106,7 @@ YÊU CẦU:
   messages = [{'role': 'system', 'content': SYSTEM_PROMPT}]
 
   if chat_history:
-    for msg in chat_history[-6:]: # Lấy 6 tin nhắn trước trong lịch sử
+    for msg in chat_history: # Lấy 6 tin nhắn trước trong lịch sử
       messages.append({'role': msg['role'], 'content': msg['content']})
   
   messages.append({'role': 'user', 'content': user_msg})
