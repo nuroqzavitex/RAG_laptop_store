@@ -106,7 +106,7 @@ YÊU CẦU:
   messages = [{'role': 'system', 'content': SYSTEM_PROMPT}]
 
   if chat_history:
-    for msg in chat_history: # Lấy 6 tin nhắn trước trong lịch sử
+    for msg in chat_history: 
       messages.append({'role': msg['role'], 'content': msg['content']})
   
   messages.append({'role': 'user', 'content': user_msg})
@@ -148,10 +148,9 @@ def contextualize_query(query: str, chat_history: list[dict[str, str]]) -> str:
   
   client = _get_client()
 
-  # Lấy 5 tin nhắn gần nhất
   history_text = '\n'.join([
     f"{'User' if m['role'] == 'user' else 'Bot'}: {m['content']}"
-    for m in chat_history[-5:]
+    for m in chat_history
   ])      
 
   prompt = f"""Lịch sử hội thoại:
