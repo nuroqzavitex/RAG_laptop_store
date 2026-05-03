@@ -16,11 +16,11 @@ def _find_point_by_doc_id(collection_name: str, product_id: str) -> int | None:
         must=[
           FieldCondition(
             key='_doc_id',
-            value=MatchValue(value=product_id)
+            match=MatchValue(value=product_id)
           ),
           FieldCondition(
             key='type',
-            value=MatchValue(value='product')
+            match=MatchValue(value='product')
           )
         ]
       ),

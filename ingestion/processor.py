@@ -64,7 +64,7 @@ def process_products(products: list[Product]) -> list[tuple[str, str, dict[str, 
   for p in products:
     text = product_to_text(p)
     meta = product_to_metadata(p)
-    results.append(p.id, text, meta)
+    results.append((p.id, text, meta))
   
   log.info(f'Processed {len(results)} products to text + metadata')
   return results

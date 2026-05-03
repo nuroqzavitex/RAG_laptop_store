@@ -79,7 +79,7 @@ def add_to_history(user_id: str, session_id: str, role: str, content: str) -> No
       client.table('chat_history')\
         .delete()\
         .eq('session_id', session_id)\
-        .lt('create_at', threshold_time)\
+        .lt('created_at', threshold_time)\
         .execute()
       log.debug(f'Cleaned up old messages in session {session_id} created before {threshold_time}')
   

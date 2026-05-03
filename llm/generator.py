@@ -1,7 +1,7 @@
 from __future__ import annotations
 import enum
 import time
-from openai import OpenAI, max_retries
+from openai import OpenAI
 from config.settings import cfg
 from core.logger import get_logger
 from core.models import RetrievedDoc

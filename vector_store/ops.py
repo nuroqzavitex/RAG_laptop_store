@@ -39,7 +39,7 @@ def search(collection_name: str, query_embedding: list[float], top_k: int = 10, 
   client = _get_client()
   if not client.collection_exists(collection_name):
     log.info(f'Collection {collection_name} does not exist, returning empty search results')
-    return {'ids': [[]], 'documents': [[]], 'metadata': [[]], 'distances': [[]]}
+    return {'ids': [[]], 'documents': [[]], 'metadatas': [[]], 'distances': [[]]}
   
   qdrant_filter = _build_qdrant_filter(where) if where else None
 
@@ -78,7 +78,7 @@ def search(collection_name: str, query_embedding: list[float], top_k: int = 10, 
   
   except Exception as e:
     log.error(f'Qdrant search error: {e}')
-    return {'ids': [[]], 'documents': [[]], 'metadata': [[]], 'distances': [[]]}
+    return {'ids': [[]], 'documents': [[]], 'metadatas': [[]], 'distances': [[]]}
 
 def add_product_to_collection(collection_name: str, product_id: str, text: str, embedding: list[float], metadata: dict[str, Any]) -> None:
   _ensure_collection(collection_name, len(embedding))

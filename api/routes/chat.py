@@ -25,7 +25,7 @@ async def chat_endpoint(req: ChatRequest, user_id: str = Depends(get_current_use
   
 @router.get('/reset')
 async def reset_session(req: ResetRequest, user_id: str = Depends(get_current_user)):
-  chatbot.reset_session(user_id, req.session_id)
+  chatbot.reset_history(user_id, req.session_id)
   return {'status': 'ok', 'message': f"Session '{req.session_id}' reset for user {user_id}."}
 
 @router.get('/history')

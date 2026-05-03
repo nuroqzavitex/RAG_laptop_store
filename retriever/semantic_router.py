@@ -26,11 +26,11 @@ class SemanticRouter:
   def __init__(self):
     log.info('Initializing SemanticRouter')
 
-    chitchat_raw = self._get_embedding(_CHITCHAT_SAMPLE) # dim = (N, dim_embed)
-    rag_raw = self._get_embedding(_RAG_SAMPLES)
+    chitchat_raw = self._get_embeddings(_CHITCHAT_SAMPLE) # dim = (N, dim_embed)
+    rag_raw = self._get_embeddings(_RAG_SAMPLES)
 
     self.chitchat_embeddings = self._normalize(chitchat_raw)
-    self.rag_embeddings = self._nomarlize(rag_raw)
+    self.rag_embeddings = self._normalize(rag_raw)
     log.info('Semantic router anchors initialized and normalized')
 
   def _get_embeddings(self, texts: list[str]) -> np.ndarray:

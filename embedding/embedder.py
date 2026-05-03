@@ -50,7 +50,7 @@ def embed_batch(texts: list[str], batch_size: int = 50) -> list[list[float]]:
           model = cfg.gemini.embedding_model,
           contents = batch
         )
-        for emb in result.emnbeddings:
+        for emb in result.embeddings:
           all_embeddings.append(emb.values)
         success = True
         time.sleep(2) # Thêm delay nhỏ giữa các batch để giảm nguy cơ bị rate limit
